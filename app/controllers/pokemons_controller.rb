@@ -1,5 +1,4 @@
 class PokemonsController < ApplicationController
-  before_action :get_pokemons, only: [:all, :select]
   before_action :pokemon_params, only: [:select]
 
   # GET /
@@ -9,14 +8,13 @@ class PokemonsController < ApplicationController
 
   # GET /all
   def all
-    json_response(@pokemons)
+    json_response(repo.all)
   end
 
   # POST /select
   def select
-    data_hash = JSON.parse(@pokemons)
-    json_response('player'=>data_hash.find {|h1| h1['name']==pokemon_params[:name]},
-                  'against'=>data_hash.sample)
+    json_response('player'=>repo.find(pokemon_params[:name]),
+                  'against'=>repo.random)
   end
 
   # POST /hit
@@ -30,7 +28,7 @@ class PokemonsController < ApplicationController
     params.permit(:name, pokemon: {})
   end
 
-  def get_pokemons
-    @pokemons = File.read('storage/pokemons.json')
+  def repo 
+    @repo ||= PokemonRepository.new
   end    
 end
