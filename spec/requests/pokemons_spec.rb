@@ -42,5 +42,33 @@ RSpec.describe 'Pokemon API', type: :request do
       end
     end
   end
+
+  describe 'POST /hit' do
+    let(:valid_attributes) {{
+        player: {
+            name: "Squirtle",
+            currentHealth: 60,
+            attack: "Water Gun"
+        },
+        against: {
+            name: "Charmander",
+            currentHealth: 50
+        }
+    }}
+
+    context 'when the request is valid' do
+      before { post '/hit', params: valid_attributes }
+
+      it 'hits an opponent' do
+        expect(json[0]['player'][0]['name']).to eq('Squirtle')
+        expect(json[0]['against'][0]['name']).to eq('Charmander')
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+  end
   
 end

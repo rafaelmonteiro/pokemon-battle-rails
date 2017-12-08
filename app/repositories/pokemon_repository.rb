@@ -18,6 +18,6 @@ class PokemonRepository
   end
 
   def get_pokemons
-    @pokemons = File.read('storage/pokemons.json')
+    File.read('storage/pokemons.json')
   end    
 end
