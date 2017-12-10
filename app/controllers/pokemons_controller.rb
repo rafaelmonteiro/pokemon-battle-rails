@@ -40,16 +40,16 @@ class PokemonsController < ApplicationController
       ['name' => @player.name,
         'currentHealth' => @player.health,
         'damage' => @against.received_damage,
-        'desc' => 'player attack description',
-        'desc_id' => 4,
+        'desc' => @player.damage_calculator.type_modifier_calc.type_modifier.description,
+        'desc_id' => @player.damage_calculator.type_modifier_calc.type_modifier.id,
       ],
       'against' => 
         ['name' => @against.name,
           'currentHealth' => @against.health,
           'attack' => @player.received_attack.name,
           'damage' => @player.received_damage,
-          'desc' => 'opponent attack description',
-          'desc_id' => 5,
+          'desc' => @against.damage_calculator.type_modifier_calc.type_modifier.description,
+          'desc_id' => @against.damage_calculator.type_modifier_calc.type_modifier.id,
         ]
     ])
   end    

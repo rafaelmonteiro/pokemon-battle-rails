@@ -5,12 +5,10 @@ class TypeModifier
 
   attr_accessor :id, :description, :multiplier
 
-  def initialize(attributes = {})
-    if attributes
-      attributes.each do |name, value|
-        send("#{name}=", value)
-      end
-    end
+  def initialize(id)
+    self.id = id
+    self.description = TYPE_MODIFIER_DESCRIPTION[0][id]
+    self.multiplier = TYPE_MODIFIER_MULTIPLIER[0][id] 
   end
 
   def critical

@@ -7,12 +7,9 @@ class Damage
 
   validates_presence_of :damage
 
-  def initialize(attributes = {})
-    if attributes
-      attributes.each do |name, value|
-        send("#{name}=", value)
-      end
-    end
+  def initialize(damage, type_modifier)
+    self.damage = damage
+    self.type_modifier = type_modifier
   end
 
   def persisted?

@@ -7,12 +7,13 @@ class Attack
 
   validates_presence_of :name
 
-  def initialize(attributes = {})
+  def initialize(attributes = {}, pokemon)
     if attributes
       attributes.each do |name, value|
         send("#{name}=", value)
       end
     end
+    self.pokemon = pokemon
   end
 
   def persisted?
