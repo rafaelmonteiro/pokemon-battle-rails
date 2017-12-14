@@ -36,22 +36,22 @@ class PokemonsController < ApplicationController
     @player.hit(@player_attack, @against)
     @against.hit(@random_against_attack, @player)
 
-    json_response(['player'=> 
-      ['name' => @player.name,
+    json_response('player'=> 
+      {'name' => @player.name,
         'currentHealth' => @player.health,
         'damage' => @against.received_damage,
         'desc' => @player.damage_calculator.type_modifier_calc.type_modifier.description,
         'desc_id' => @player.damage_calculator.type_modifier_calc.type_modifier.id,
-      ],
+      },
       'against' => 
-        ['name' => @against.name,
+        {'name' => @against.name,
           'currentHealth' => @against.health,
           'attack' => @player.received_attack.name,
           'damage' => @player.received_damage,
           'desc' => @against.damage_calculator.type_modifier_calc.type_modifier.description,
           'desc_id' => @against.damage_calculator.type_modifier_calc.type_modifier.id,
-        ]
-    ])
+        }
+    )
   end    
 
   private
