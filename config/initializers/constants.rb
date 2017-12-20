@@ -56,7 +56,7 @@ TYPE_MODIFIER_DESCRIPTION = [
   DAMAGE_TYPE[0]['DOUBLE_DAMAGE']           => "It's super effective!",
   DAMAGE_TYPE[0]['HALF_DAMAGE']             => "It's not very effective... ",
   DAMAGE_TYPE[0]['NO_DAMAGE']               => "It's not effective ",
-  DAMAGE_TYPE[0]['CRITICAL_2XDAMAGE']       => 'Not implemented',
+  DAMAGE_TYPE[0]['CRITICAL_2XDAMAGE']       => "It's super effective! (Critical)",
   DAMAGE_TYPE[0]['CRITICAL_HALF_DAMAGE']    => 'Not implemented',
 ].freeze
 
@@ -67,7 +67,7 @@ TYPE_MODIFIER_MULTIPLIER = [
   DAMAGE_TYPE[0]['DOUBLE_DAMAGE']           => 20,
   DAMAGE_TYPE[0]['HALF_DAMAGE']             => 2.5,
   DAMAGE_TYPE[0]['NO_DAMAGE']               => 0,
-  DAMAGE_TYPE[0]['CRITICAL_2XDAMAGE']       => 0,
+  DAMAGE_TYPE[0]['CRITICAL_2XDAMAGE']       => 27,
   DAMAGE_TYPE[0]['CRITICAL_HALF_DAMAGE']    => 0,
 ].freeze
 

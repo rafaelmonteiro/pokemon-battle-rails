@@ -11,28 +11,30 @@ class TypeModifierCalculator
   end
 
   def calculate
-    @accuracy = rand(1..100)
-    @type_modifier = calculate_type_modifier(@player_attack)
-
-    if @accuracy >= 90
-      @type_modifier.critical
-    end
-
-    if @accuracy <= 10
-      @type_modifier.missed
-    end    
-
-    return @type_modifier
+    return @type_modifier = calculate_type_modifier(@player_attack)    
   end
 
   def calculate_type_modifier(player_attack)
     @defense = ATTACK_TYPE[0].key(@against_pokemon.type)
     @attack = ATTACK_TYPE[0].key(player_attack.type)
     @multiplier = TYPE_MODIFIER[@attack][@defense]
+    @accuracy = rand(1..100)
 
     if @multiplier > 0
+      if @accuracy <= 10
+        return TypeModifier.new(DAMAGE_TYPE[0]['MISSED'])
+      end
+
+      if @multiplier == 1 && @accuracy >= 90
+        return TypeModifier.new(DAMAGE_TYPE[0]['CRITICAL'])
+      end
+
       if @multiplier == 1    
         return TypeModifier.new(DAMAGE_TYPE[0]['NORMAL'])
+      end
+
+      if @multiplier > 1 && @accuracy >= 90
+        return TypeModifier.new(DAMAGE_TYPE[0]['CRITICAL_2XDAMAGE'])
       end
 
       if @multiplier > 1
