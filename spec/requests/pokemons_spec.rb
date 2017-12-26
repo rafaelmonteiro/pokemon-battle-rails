@@ -30,7 +30,7 @@ RSpec.describe 'Pokemon API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/select', params: { title: 'Agumon' } }
+      before { post '/select', params: { title: 'Bulbasaur' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -39,6 +39,19 @@ RSpec.describe 'Pokemon API', type: :request do
       it 'returns a validation failure message' do
         expect(response.body)
           .to match(/unknown_parameters/)
+      end
+    end
+
+    context 'when the Pokemon is invalid' do
+      before { post '/select', params: { name: 'Agumon' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns an unknown value message' do
+        expect(response.body)
+          .to match(/unknown_values/)
       end
     end
   end
@@ -60,15 +73,14 @@ RSpec.describe 'Pokemon API', type: :request do
       before { post '/hit', params: valid_attributes }
 
       it 'hits an opponent' do
-        expect(json[0]['player'][0]['name']).to eq('Squirtle')
-        expect(json[0]['against'][0]['name']).to eq('Charmander')
+        expect(json['player']['name']).to eq('Squirtle')
+        expect(json['against']['name']).to eq('Charmander')
       end
 
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
     end
-
   end
   
 end
